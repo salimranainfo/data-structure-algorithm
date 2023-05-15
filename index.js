@@ -112,4 +112,20 @@ const LinkedList = class {
 
     return temp
   }
+
+  get(index) {
+    if (index < 0 || !this.length || index >= this.length) {
+      return undefined
+    }
+
+    let temp = this.head
+    let loopCount = 0
+
+    while (loopCount < index) {
+      loopCount++
+      temp = temp.next
+    }
+
+    return temp
+  }
 }
