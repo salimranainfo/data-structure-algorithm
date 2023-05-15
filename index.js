@@ -36,4 +36,36 @@ const LinkedList = class {
     this.length++
     return this
   }
+
+  pop() {
+    if (this.length <= 0) {
+      return undefined
+    }
+
+    let temp = this.head.next
+    let prev = this.head
+
+    if (this.length === 1) {
+      temp = this.head
+
+      this.head = null
+      this.tail = null
+
+      this.length--
+
+      return temp
+    }
+
+    while (temp.next) {
+      temp = temp.next
+      prev = temp
+    }
+
+    prev.next = null
+    this.tail = prev
+
+    this.length--
+
+    return temp
+  }
 }
