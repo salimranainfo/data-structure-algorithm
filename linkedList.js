@@ -139,4 +139,32 @@ const LinkedList = class {
 
     return false
   }
+
+  insert(index, data) {
+    if (index < 0 || (this.length && index >= this.length)) {
+      return false
+    }
+
+    if ((index === 0 && !this.length) || index === this.length - 1) {
+      const res = this.push(data)
+
+      return res ? true : false
+    }
+
+    const indexData = this.get(index)
+
+    if (indexData) {
+      const node = new Node(data)
+
+      const after = indexData.next
+      indexData.next = node
+      node.next = after
+
+      this.length++
+
+      return true
+    }
+
+    return undefined
+  }
 }
