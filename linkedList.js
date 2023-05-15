@@ -35,7 +35,7 @@ const LinkedList = class {
     this.tail = node
     this.length++
     return this
-  }
+  } // O(1)
 
   pop() {
     if (this.length <= 0) {
@@ -67,7 +67,7 @@ const LinkedList = class {
     this.length--
 
     return temp
-  }
+  } // O(n)
 
   unshift(data) {
     const node = new Node(data)
@@ -87,7 +87,7 @@ const LinkedList = class {
     this.length++
 
     return this
-  }
+  } // O(1)
 
   shift() {
     if (!this.length) {
@@ -111,7 +111,7 @@ const LinkedList = class {
     this.length--
 
     return temp
-  }
+  } // O(1)
 
   get(index) {
     if (index < 0 || !this.length || index >= this.length) {
@@ -127,7 +127,7 @@ const LinkedList = class {
     }
 
     return temp
-  }
+  } // O(n)
 
   set(index, data) {
     const indexData = this.get(index)
@@ -138,7 +138,7 @@ const LinkedList = class {
     }
 
     return false
-  }
+  } // O(n)
 
   insert(index, data) {
     if (index < 0 || (this.length && index >= this.length)) {
@@ -166,7 +166,7 @@ const LinkedList = class {
     }
 
     return undefined
-  }
+  } // O(n)
 
   reverse() {
     let temp = this.head
@@ -183,11 +183,39 @@ const LinkedList = class {
     }
 
     return this
-  }
+  } // O(n)
+
+  remove(index) {
+    if (index < 0 || index >= this.length) {
+      return undefined
+    }
+
+    if (index === 0) {
+      return this.shift()
+    }
+
+    if (index === this.length - 1) {
+      return this.pop()
+    }
+
+    let temp = this.head
+    let next = this.head.next
+
+    for (let i = 0; i < index - 1; i++) {
+      temp = temp.next
+      next = temp.next
+    }
+
+    temp.next = next.next
+
+    this.length--
+
+    return next
+  } // O(n)
 }
 
 const linkedListOne = new LinkedList(1)
 linkedListOne.push(2)
 linkedListOne.push(3)
 
-console.log(linkedListOne)
+console.dir(linkedListOne)
