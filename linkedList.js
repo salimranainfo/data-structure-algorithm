@@ -128,4 +128,15 @@ const LinkedList = class {
 
     return temp
   }
+
+  set(index, data) {
+    const indexData = this.get(index)
+
+    if (indexData) {
+      indexData.data = data
+      return true
+    }
+
+    return false
+  }
 }
