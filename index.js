@@ -68,4 +68,48 @@ const LinkedList = class {
 
     return temp
   }
+
+  unshift(data) {
+    const node = new Node(data)
+
+    if (!this.length) {
+      this.head = node
+      this.tail = this.head
+
+      this.length = 1
+
+      return this
+    }
+
+    node.next = this.head
+    this.head = node
+
+    this.length++
+
+    return this
+  }
+
+  shift() {
+    if (!this.length) {
+      return undefined
+    }
+
+    const temp = this.head
+
+    if (this.length === 1) {
+      this.head = null
+      this.tail = null
+
+      this.length--
+
+      return temp
+    }
+
+    this.head = temp.next
+    temp.next = null
+
+    this.length--
+
+    return temp
+  }
 }
