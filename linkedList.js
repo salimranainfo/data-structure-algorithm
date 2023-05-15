@@ -57,8 +57,8 @@ const LinkedList = class {
     }
 
     while (temp.next) {
-      temp = temp.next
       prev = temp
+      temp = temp.next
     }
 
     prev.next = null
@@ -167,4 +167,27 @@ const LinkedList = class {
 
     return undefined
   }
+
+  reverse() {
+    let temp = this.head
+    this.head = this.tail
+    this.tail = temp
+    let next = temp.next
+    let prev = null
+
+    for (let i = 0; i < this.length; i++) {
+      next = temp.next
+      temp.next = prev
+      prev = temp
+      temp = next
+    }
+
+    return this
+  }
 }
+
+const linkedListOne = new LinkedList(1)
+linkedListOne.push(2)
+linkedListOne.push(3)
+
+console.log(linkedListOne)
