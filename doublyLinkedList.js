@@ -152,7 +152,7 @@ const DoublyLinkedList = class {
     }
 
     return false
-  } // O(n)
+  } // O(log n)
 
   insert(index, data) {
     if (index < 0 || (this.length && index >= this.length)) {
@@ -173,6 +173,7 @@ const DoublyLinkedList = class {
       const after = indexData.next
       indexData.next = node
       node.next = after
+      node.prev = indexData
 
       this.length++
 
@@ -180,20 +181,25 @@ const DoublyLinkedList = class {
     }
 
     return undefined
-  } // O(n)
+  } // O(log n)
 
   reverse() {
-    let temp = this.head
+    let temp = null
+    let current = this.head
     this.head = this.tail
-    this.tail = temp
-    let next = temp.next
-    let prev = null
+    this.tail = current
 
     for (let i = 0; i < this.length; i++) {
-      next = temp.next
-      temp.next = prev
-      prev = temp
-      temp = next
+      if (current) {
+        temp = current.prev
+        current.prev = current.next
+        current.next = temp
+        current = current.prev
+      }
+    }
+
+    if (temp) {
+      this.head = temp.prev
     }
 
     return this
