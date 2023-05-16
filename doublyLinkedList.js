@@ -74,6 +74,10 @@ const DoublyLinkedList = class {
   } // O(n)
 
   unshift(data) {
+    if (!data) {
+      return undefined
+    }
+
     const node = new Node(data)
 
     if (!this.head) {
@@ -218,20 +222,20 @@ const DoublyLinkedList = class {
       return this.pop()
     }
 
-    let temp = this.head
-    let next = this.head.next
+    const node = this.get(index)
 
-    for (let i = 0; i < index - 1; i++) {
-      temp = temp.next
-      next = temp.next
+    if (node) {
+      const before = node.prev
+      const after = node.next
+
+      before.next = after
+      after.prev = before
+
+      this.length--
     }
 
-    temp.next = next.next
-
-    this.length--
-
-    return next
-  } // O(n)
+    return node
+  } // O(log n)
 }
 
 const linkedListOne = new LinkedList(1)
